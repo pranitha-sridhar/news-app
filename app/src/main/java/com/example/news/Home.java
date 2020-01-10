@@ -20,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
 
-
     Apiclass api;
     RecyclerView recyclerView;
     Adapter adapter;
