@@ -47,6 +47,7 @@ public class Home extends AppCompatActivity {
                if(response.isSuccessful() && response.body().getArticles()!=null){
                    articles.clear();
                    articles=response.body().getArticles();
+
                    adapter=new Adapter(Home.this,articles);
                    recyclerView.setAdapter(adapter);
                }
