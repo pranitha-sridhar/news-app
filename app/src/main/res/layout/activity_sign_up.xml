@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignUp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/pic"
         android:id="@+id/mail"
-        android:hint="Enter User Email ID"/>
+        android:hint="Enter a valid Email ID"/>
 
     <EditText
         android:layout_marginTop="10dp"
@@ -38,20 +38,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/mail"
         android:id="@+id/password"
-        android:hint="Enter Password"/>
+        android:hint="Enter New Password"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
+        android:layout_margin="55dp"
         android:id="@+id/button"
         android:text="Submit"
         android:layout_centerHorizontal="true"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/button"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/signup"
-        android:text="New User-Sign up here"/>
 
 </RelativeLayout>
