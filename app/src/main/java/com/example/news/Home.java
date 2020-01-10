@@ -45,9 +45,13 @@ public class Home extends AppCompatActivity {
         call.enqueue(new Callback<List<Newsclass>>(){
             @Override
             public void onResponse(Call<List<Newsclass>> call, Response<List<Newsclass>> response) {
-                articles=response.body().getArticles();
-                adapter=new Adapter(Home.this,articles);
-                recyclerView.setAdapter(adapter);
+               if(response.isSuccessful()&& response.body().getArticles()!=null){
+                   articles.clear();
+                   articles=response.body().getArticles();
+                   adapter=new Adapter(Home.this,articles);
+                   recyclerView.setAdapter(adapter);
+               }
+
             }
 
             @Override
