@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
 
-    Retrofit retrofit;
+
     Apiclass api;
     RecyclerView recyclerView;
     Adapter adapter;
@@ -45,7 +45,7 @@ public class Home extends AppCompatActivity {
         call.enqueue(new Callback<List<Newsclass>>(){
             @Override
             public void onResponse(Call<List<Newsclass>> call, Response<List<Newsclass>> response) {
-               if(response.isSuccessful()&& response.body().getArticles()!=null){
+               if(response.isSuccessful() && response.body().getArticles()!=null){
                    articles.clear();
                    articles=response.body().getArticles();
                    adapter=new Adapter(Home.this,articles);
