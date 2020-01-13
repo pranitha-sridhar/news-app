@@ -1,24 +1,21 @@
 package com.example.news;
 
+import okhttp3.OkHttpClient;
+import okhttp3.internal.tls.OkHostnameVerifier;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Apiclass {
-    private static final String BASE_URL="https://newsapi.org/v2/";
-    private static Apiclass apiclass;
-    private static Retrofit retrofit;
+    public static final String BASE_URL="https://newsapi.org/v2/";
+    public static Retrofit retrofit;
+    public static Retrofit getApiClass(){
+        if(retrofit==null) {
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-    private Apiclass(){
-        retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-
-    }
-    public static synchronized Apiclass getInstance(){
-        if(apiclass==null){
-            apiclass=new Apiclass();
         }
-        return apiclass;
+        return retrofit;
     }
-    public Api getApi(){
-        return retrofit.create(Api.class);
-    }
+
+
+
 }

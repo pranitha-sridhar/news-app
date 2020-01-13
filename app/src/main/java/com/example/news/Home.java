@@ -19,8 +19,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
-
-    Apiclass api;
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles=new ArrayList<>();
@@ -32,33 +30,34 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         retrieveJSON("in","8d4405efb30c405c8bd8ae6c449e5078");
 
-
         recyclerView=findViewById(R.id.RView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
+    public void retrieveJSON(String country, String API_KEY){
+        Api api=Apiclass.getApiClass().create(Api.class);
 
-    public void retrieveJSON(String country, String APIKEY){
-        Call<List<Newsclass>> call =api.getInstance().getApi().getNews(country,APIKEY);
-        call.enqueue(new Callback<List<Newsclass>>(){
+        Call<Newsclass> call =api.getNews(country,API_KEY);
+        call.enqueue(new Callback<Newsclass>(){
             @Override
-            public void onResponse(Call<List<Newsclass>> call, Response<List<Newsclass>> response) {
-               if(response.isSuccessful() && response.body().getArticles()!=null){
-                   articles.clear();
-                   articles=response.body().getArticles();
+            public void onResponse(Call<Newsclass> call, Response<Newsclass> response) {
+                if(response.isSuccessful() && response.body().getArticles()!=null){
+                    if(!articles.isEmpty()) articles.clear();
+                    articles=response.body().getArticles();
 
-                   adapter=new Adapter(Home.this,articles);
-                   recyclerView.setAdapter(adapter);
-               }
-
+                    adapter=new Adapter(Home.this,articles);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"ERROR!",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Newsclass>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Newsclass> call, Throwable t) { }
 
-            }
         });
 
     }

@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface Api {
 
     @GET("top-headlines")
-    Call<List<Newsclass>> getNews(
+    Call<Newsclass> getNews(
             @Query("country")String country,
             @Query("apiKey")String apiKey
     );

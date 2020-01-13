@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+        android:elevation="@dimen/cardview_default_elevation"
     android:id="@+id/cardView">
 
     <FrameLayout
@@ -36,6 +37,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/url"
                 android:text="URL"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/author"
+                android:text="Author"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Source"
+                android:id="@+id/source"/>
         </LinearLayout>
 
     </FrameLayout>

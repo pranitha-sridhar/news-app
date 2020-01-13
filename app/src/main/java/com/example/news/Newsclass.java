@@ -3,9 +3,9 @@ package com.example.news;
 import java.util.List;
 
 public class Newsclass {
-    String status;
-    String totalResults;
-    List<Articles> articles;
+    private String status;
+    private int totalResults;
+    private List<Articles> articles;
 
 
     public String getStatus() {
@@ -16,11 +16,11 @@ public class Newsclass {
         this.status = status;
     }
 
-    public String getTotalResults() {
+    public int getTotalResults() {
         return totalResults;
     }
 
-    public void setTotalResults(String totalResults) {
+    public void setTotalResults(int totalResults) {
         this.totalResults = totalResults;
     }
 

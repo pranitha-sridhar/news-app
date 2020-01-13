@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
-
-    Context context;
-    List<Articles> articles;
-
+    private Context context;
+    private List<Articles> articles;
     public Adapter(Context context, List<Articles> articles) {
         this.context = context;
         this.articles = articles;
@@ -29,24 +28,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.news_cards,parent,false);
         return new ViewHolder(view);
     }
-
-    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Articles a=articles.get(position);
-        holder.title.setText(a.title);
-        holder.description.setText(a.description);
-        holder.url.setText(a.url);
+        holder.title.setText(a.getTitle());
+        holder.description.setText(a.getDescription());
+        holder.url.setText(a.getUrl());
         String urlToImage=a.getUrlToImage();
         
 
     }
-
     @Override
     public int getItemCount() {
         return articles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
         TextView title,description,url;
         ImageView pic;
         CardView cardView;
@@ -63,4 +61,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         }
     }
+
+
 }
+
