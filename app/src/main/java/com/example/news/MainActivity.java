@@ -22,9 +22,26 @@ public class MainActivity extends AppCompatActivity {
     String userid,pswd;
     FirebaseAuth mAuth;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser()!=null){
+            finish();
+            startActivity(new Intent(MainActivity.this,Home.class));
+        }
+    }
+
     private void login() {
         String email = id.getText().toString();
         String loginpassword = password.getText().toString();
+        if (email.isEmpty()) {
+            id.setError("Email is needed");
+            return;
+        }
+        if (loginpassword.isEmpty()) {
+            password.setError("Password is needed");
+            return;
+        }
 
         mAuth.signInWithEmailAndPassword(email, loginpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

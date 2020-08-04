@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
     Adapter adapter;
     List<Articles> articles=new ArrayList<>();
 
@@ -28,10 +30,14 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        retrieveJSON("in","8d4405efb30c405c8bd8ae6c449e5078");
 
         recyclerView=findViewById(R.id.RView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        retrieveJSON("in","8d4405efb30c405c8bd8ae6c449e5078");
+
+
 
     }
 
@@ -49,6 +55,18 @@ public class Home extends AppCompatActivity {
                     adapter=new Adapter(Home.this,articles);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Toast.makeText(Home.this, "Open", Toast.LENGTH_SHORT).show();
+                            Articles art=articles.get(position);
+                            String url=art.getUrl();
+                            Intent intent=new Intent(Home.this,WebUrl.class);
+                            intent.putExtra("url",url);
+                            startActivity(intent);
+
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"ERROR!",Toast.LENGTH_SHORT).show();
@@ -59,6 +77,8 @@ public class Home extends AppCompatActivity {
             public void onFailure(Call<Newsclass> call, Throwable t) { }
 
         });
+
+
 
     }
 }

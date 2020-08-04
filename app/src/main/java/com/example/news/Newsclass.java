@@ -4,7 +4,9 @@ import java.util.List;
 
 public class Newsclass {
     private String status;
+
     private int totalResults;
+
     private List<Articles> articles;
 
 
@@ -24,7 +26,7 @@ public class Newsclass {
         this.totalResults = totalResults;
     }
 
-    public List<Articles> getArticles() {
+    List<Articles> getArticles() {
         return articles;
     }
 
